@@ -21,6 +21,7 @@ class FishingLootIDEventEntry(
 
 @EntryListener(FishingLootIDEventEntry::class)
 fun onFishingResultEvent(event: FishingResultEvent, query: Query<FishingLootIDEventEntry>) {
+    if (event.isCancelled) return
     if (event.result != FishingResultEvent.Result.SUCCESS) return
     val id = event.loot.id()
     query findWhere { entry ->

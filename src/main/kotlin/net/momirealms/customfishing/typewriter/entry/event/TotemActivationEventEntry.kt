@@ -20,6 +20,7 @@ class TotemActivationEventEntry(
 
 @EntryListener(TotemActivationEventEntry::class)
 fun onTotemActivateEvent(event: TotemActivateEvent, query: Query<TotemActivationEventEntry>) {
+    if (event.isCancelled) return
     query findWhere { entry ->
         if (entry.totemId.isEmpty()) {
             return@findWhere true

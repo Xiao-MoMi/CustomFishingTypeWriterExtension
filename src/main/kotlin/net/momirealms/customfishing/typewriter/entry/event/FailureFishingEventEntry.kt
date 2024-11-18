@@ -20,6 +20,7 @@ class FailureFishingEventEntry(
 
 @EntryListener(FailureFishingEventEntry::class)
 fun onFishingResultEvent(event: FishingResultEvent, query: Query<FailureFishingEventEntry>) {
+    if (event.isCancelled) return
     if (event.result != FishingResultEvent.Result.FAILURE) return
     val entries = query.find()
     entries triggerAllFor event.player

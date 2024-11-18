@@ -24,6 +24,7 @@ class FishingLootGroupEventEntry(
 
 @EntryListener(FishingLootGroupEventEntry::class)
 fun onFishingResultEvent(event: FishingResultEvent, query: Query<FishingLootGroupEventEntry>) {
+    if (event.isCancelled) return
     if (event.result != FishingResultEvent.Result.SUCCESS) return
     val groups = event.loot.lootGroup()
     query findWhere { entry ->
