@@ -3,7 +3,10 @@ package net.momirealms.customfishing.typewriter.entry.event
 import com.typewritermc.core.books.pages.Colors
 import com.typewritermc.core.entries.Query
 import com.typewritermc.core.entries.Ref
-import com.typewritermc.core.extension.annotations.*
+import com.typewritermc.core.extension.annotations.Entry
+import com.typewritermc.core.extension.annotations.EntryListener
+import com.typewritermc.core.extension.annotations.Help
+import com.typewritermc.core.interaction.context
 import com.typewritermc.engine.paper.entry.TriggerableEntry
 import com.typewritermc.engine.paper.entry.entries.EventEntry
 import com.typewritermc.engine.paper.entry.triggerAllFor
@@ -24,10 +27,10 @@ fun onFishingResultEvent(event: FishingResultEvent, query: Query<FishingLootIDEv
     if (event.isCancelled) return
     if (event.result != FishingResultEvent.Result.SUCCESS) return
     val id = event.loot.id()
-    query findWhere { entry ->
+    query.findWhere { entry ->
         if (entry.lootId.isEmpty()) {
             return@findWhere true
         }
         entry.lootId.contains(id)
-    } triggerAllFor event.player
+    }.triggerAllFor(event.player, context())
 }

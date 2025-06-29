@@ -1,32 +1,31 @@
 plugins {
     id("java")
     kotlin("jvm") version "2.0.21"
-    id("com.typewritermc.module-plugin") version "1.0.0"
+    id("com.typewritermc.module-plugin") version "1.1.2"
 }
 
 group = "net.momirealms"
-version = "1.0"
+version = "1.1"
 
 repositories {
     mavenCentral()
-    maven("https://jitpack.io/")
+    maven("https://repo.momirealms.net/releases/")
     maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://maven.typewritermc.com/beta/")
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
-    compileOnly("com.github.Xiao-MoMi:Custom-Fishing:2.2.32")
+    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("net.momirealms:custom-fishing:2.3.7")
 }
 
 typewriter {
-    engine {
-        version = "0.6.1"
-    }
     namespace = "customfishing"
     extension {
         name = "CustomFishing"
         shortDescription = "Integrate CustomFishing with Typewriter."
         description = "The CustomFishing extension provides seamless integration with the CustomFishing system, enabling you to utilize and customize fishing-related events with greater flexibility."
+        engineVersion = "0.8.0"
         paper {
             dependency("CustomFishing")
         }

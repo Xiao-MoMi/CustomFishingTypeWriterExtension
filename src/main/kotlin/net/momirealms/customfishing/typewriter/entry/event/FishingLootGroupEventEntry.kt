@@ -6,6 +6,7 @@ import com.typewritermc.core.entries.Ref
 import com.typewritermc.core.extension.annotations.Entry
 import com.typewritermc.core.extension.annotations.EntryListener
 import com.typewritermc.core.extension.annotations.Help
+import com.typewritermc.core.interaction.context
 import com.typewritermc.engine.paper.entry.TriggerableEntry
 import com.typewritermc.engine.paper.entry.entries.EventEntry
 import com.typewritermc.engine.paper.entry.triggerAllFor
@@ -27,7 +28,7 @@ fun onFishingResultEvent(event: FishingResultEvent, query: Query<FishingLootGrou
     if (event.isCancelled) return
     if (event.result != FishingResultEvent.Result.SUCCESS) return
     val groups = event.loot.lootGroup()
-    query findWhere { entry ->
+    query.findWhere { entry ->
         entry.groupId.map {
             groups?: return@map false
             for (group in groups) {
@@ -37,5 +38,5 @@ fun onFishingResultEvent(event: FishingResultEvent, query: Query<FishingLootGrou
             }
             false
         }.orElse(true)
-    } triggerAllFor event.player
+    }.triggerAllFor(event.player, context())
 }
