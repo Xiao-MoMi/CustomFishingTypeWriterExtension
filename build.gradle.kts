@@ -10,7 +10,7 @@ version = "1.1"
 repositories {
     mavenCentral()
     maven("https://repo.momirealms.net/releases/")
-    maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://maven.typewritermc.com/beta/")
 }
 
